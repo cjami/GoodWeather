@@ -1,0 +1,8 @@
+import che.codes.build.*
+
+apply from: "$rootDir/base-kotlin-library.gradle"
+
+dependencies {
+    implementation Libraries.gson
+    implementation Libraries.Test.junit
+}

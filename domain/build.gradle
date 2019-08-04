@@ -1,0 +1,7 @@
+import che.codes.build.*
+
+apply from: "$rootDir/base-kotlin-library.gradle"
+
+dependencies {
+    implementation project(':testing-tools')
+}

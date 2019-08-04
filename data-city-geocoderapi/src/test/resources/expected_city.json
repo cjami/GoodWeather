@@ -1,0 +1,9 @@
+{
+  "name": "Mountain View",
+  "country": {
+    "longName": "United States",
+    "shortName": "US"
+  },
+  "latitude": 37.4224764,
+  "longitude": -122.0842499
+}

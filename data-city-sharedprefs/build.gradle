@@ -1,0 +1,10 @@
+import che.codes.build.*
+
+apply from: "$rootDir/base-android-library.gradle"
+
+dependencies {
+    implementation project(':data')
+    implementation project(':testing-tools')
+
+    implementation Libraries.gson
+}

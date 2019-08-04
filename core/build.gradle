@@ -1,0 +1,9 @@
+import che.codes.build.*
+
+apply from: "$rootDir/base-android-library.gradle"
+
+dependencies {
+    api project(':domain')
+    implementation project(':data-city-geocoderapi')
+    implementation project(':data-weather-openweathermap')
+}
