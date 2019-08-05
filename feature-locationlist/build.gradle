@@ -4,6 +4,7 @@ apply from: "$rootDir/base-android-library.gradle"
 
 dependencies {
     implementation project(':core')
+    implementation project(':navigation')
     testImplementation project(':testing-tools')
     testImplementation project(':testing-android-tools')
 

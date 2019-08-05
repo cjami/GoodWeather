@@ -1,7 +1,6 @@
 package che.codes.goodweather.data.settings
 
 import che.codes.goodweather.domain.SettingsRepository
-import che.codes.goodweather.domain.models.Weather
 import che.codes.testing.RxTestUtils
 import che.codes.testing.RxTestUtils.getResult
 import che.codes.testing.RxTestUtils.waitForTerminalEvent

@@ -7,5 +7,7 @@ dependencies {
     implementation project(':testing-tools')
 
     implementation Libraries.retrofit
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.retrofitRxAdapter
     implementation Libraries.gson
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/nav_graph.xml"
+            app:startDestination="@id/fragment_location_list">
+
+    <fragment
+            android:id="@+id/fragment_location_list"
+            android:name="che.codes.goodweather.features.locationlist.LocationListFragment">
+        <action
+                android:id="@+id/action_add_location"
+                app:destination="@id/fragment_add_location"/>
+        <action
+                android:id="@+id/action_view_location"
+                app:destination="@id/fragment_view_location"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/fragment_add_location"
+            android:name="che.codes.goodweather.features.addlocation.AddLocationFragment"/>
+
+    <fragment
+            android:id="@+id/fragment_view_location"
+            android:name="che.codes.goodweather.features.viewlocation.ViewLocationFragment"/>
+
+    <fragment
+            android:id="@+id/fragment_settings"
+            android:name="che.codes.goodweather.features.settings.SettingsFragment"/>
+</navigation>

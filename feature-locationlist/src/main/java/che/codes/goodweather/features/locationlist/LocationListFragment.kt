@@ -1,5 +1,6 @@
 package che.codes.goodweather.features.locationlist
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import che.codes.goodweather.domain.models.City
-import che.codes.goodweather.features.locationlist.LocationListViewModel.*
+import che.codes.goodweather.features.locationlist.LocationListViewModel.Result
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_location_list.*
 import javax.inject.Inject
@@ -36,17 +39,20 @@ class LocationListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_location_list, container, false)
     }
 
+    @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         locationListAdapter = LocationListAdapter()
-        disposables.add(locationListAdapter.clickEvent.subscribe { handleLocationClick(it) })
+        disposables.add(locationListAdapter.clickEvent.subscribe { handleLocationItemClick(it) })
 
         list_locations.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             adapter = locationListAdapter
         }
+
+        button_add.clicks().subscribe { handleAddClick() }
 
         viewModel.result.observe(this, Observer<Result> { handleResult(it) })
     }
@@ -62,7 +68,11 @@ class LocationListFragment : Fragment() {
         }
     }
 
-    private fun handleLocationClick(city: City) {
-        //GOTO VIEW LOCATION
+    private fun handleLocationItemClick(city: City) {
+        findNavController().navigate(R.id.action_view_location)
+    }
+
+    private fun handleAddClick() {
+        findNavController().navigate(R.id.action_add_location)
     }
 }

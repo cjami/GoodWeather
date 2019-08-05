@@ -1,0 +1,8 @@
+import che.codes.build.*
+
+apply from: "$rootDir/base-android-library.gradle"
+
+dependencies {
+    api Libraries.Support.navigationFragment
+    api Libraries.Support.navigationUI
+}

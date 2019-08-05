@@ -2,8 +2,21 @@ import che.codes.build.*
 
 apply from: "$rootDir/base-android-library.gradle"
 
+def keys = new Properties()
+keys.load(project.rootProject.file('keys.properties').newDataInputStream())
+
+android.buildTypes.each{
+    it.buildConfigField 'String', 'GEOCODER_API_KEY', keys['geocoderapi.key']
+    it.buildConfigField 'String', 'OPENWEATHERMAP_APP_ID', keys['openweathermap.id']
+}
+
 dependencies {
     api project(':domain')
+    implementation project(':data')
     implementation project(':data-city-geocoderapi')
+    implementation project(':data-city-sharedprefs')
     implementation project(':data-weather-openweathermap')
+    implementation project(':data-settings-sharedprefs')
+
+    implementation Libraries.okhttp
 }
