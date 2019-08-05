@@ -6,19 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import che.codes.goodweather.core.ui.BaseFragment
+import che.codes.goodweather.core.di.CoreComponent
 import che.codes.goodweather.domain.models.City
 import che.codes.goodweather.features.locationlist.LocationListViewModel.Result
+import che.codes.goodweather.features.locationlist.di.DaggerLocationListComponent
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_location_list.*
 import javax.inject.Inject
 
-class LocationListFragment : Fragment() {
+class LocationListFragment : BaseFragment() {
 
     private lateinit var locationListAdapter: LocationListAdapter
 
@@ -31,6 +33,10 @@ class LocationListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        DaggerLocationListComponent.builder()
+            .coreComponent(CoreComponent.getInstance(activity!!.applicationContext))
+            .build().inject(this)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LocationListViewModel::class.java)
     }
@@ -55,6 +61,12 @@ class LocationListFragment : Fragment() {
         button_add.clicks().subscribe { handleAddClick() }
 
         viewModel.result.observe(this, Observer<Result> { handleResult(it) })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+        setActionBarTitle(R.string.title_location_list)
     }
 
     private fun handleResult(result: Result) {

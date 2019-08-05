@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Location List</string>
     <string name="format_location">%1$s, %2$s</string>
+    <string name="title_location_list">Locations</string>
 </resources>

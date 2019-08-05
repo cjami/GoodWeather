@@ -5,16 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import che.codes.goodweather.domain.usecases.AddCity
 import che.codes.goodweather.domain.usecases.LoadCities
 
-class LocationListViewModelFactory(
-    private val loadCities: LoadCities,
-    private val addCity: AddCity
-) : ViewModelProvider.Factory {
+class LocationListViewModelFactory(private val loadCities: LoadCities) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(LocationListViewModel::class.java) -> {
-                LocationListViewModel(loadCities, addCity) as T
+                LocationListViewModel(loadCities) as T
             }
             else -> throw IllegalArgumentException(
                 "${modelClass.simpleName} is an unknown view model type"

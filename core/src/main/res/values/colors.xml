@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_primary">#7E3C85</color>
+    <color name="primary">#7E3C85</color>
+    <color name="primary_dark">#632469</color>
 </resources>

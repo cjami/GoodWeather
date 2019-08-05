@@ -32,14 +32,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation project(':core')
+    implementation project(':navigation')
+    implementation project(':feature-addlocation')
+    implementation project(':feature-locationlist')
+    implementation project(':feature-settings')
+    implementation project(':feature-viewlocation')
 
     implementation Libraries.kotlin
     implementation Libraries.Support.appcompat
     implementation Libraries.Support.coreKtx
     implementation Libraries.dagger
     kapt AnnotationPlugins.dagger
+    implementation Libraries.Support.navigationFragment
+    implementation Libraries.Support.navigationUI
 }

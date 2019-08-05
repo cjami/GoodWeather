@@ -3,13 +3,12 @@ package che.codes.goodweather.features.locationlist
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import che.codes.goodweather.domain.models.City
-import che.codes.goodweather.domain.usecases.AddCity
 import che.codes.goodweather.domain.usecases.LoadCities
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LocationListViewModel(private val loadCities: LoadCities, private val addCity: AddCity) : ViewModel() {
+class LocationListViewModel(private val loadCities: LoadCities) : ViewModel() {
 
     val result = MutableLiveData<Result>()
     val disposables = CompositeDisposable()
@@ -26,11 +25,6 @@ class LocationListViewModel(private val loadCities: LoadCities, private val addC
                     result.value = Result.Error(error)
                 }
             ))
-    }
-
-    fun add(city: City) {
-        addCity.invoke(city)
-        refresh()
     }
 
     override fun onCleared() {
