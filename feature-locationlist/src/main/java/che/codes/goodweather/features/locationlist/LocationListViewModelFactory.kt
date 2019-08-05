@@ -2,7 +2,6 @@ package che.codes.goodweather.features.locationlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import che.codes.goodweather.domain.usecases.AddCity
 import che.codes.goodweather.domain.usecases.LoadCities
 
 class LocationListViewModelFactory(private val loadCities: LoadCities) : ViewModelProvider.Factory {

@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ViewModelFactoryModule {
+class LocationListModule {
 
     @Provides
     fun provideLocationListViewModelFactory(loadCities: LoadCities): LocationListViewModelFactory {

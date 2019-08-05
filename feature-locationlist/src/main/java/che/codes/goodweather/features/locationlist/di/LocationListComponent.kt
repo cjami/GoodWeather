@@ -6,7 +6,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(dependencies = [CoreComponent::class], modules = [ViewModelFactoryModule::class])
+@Component(dependencies = [CoreComponent::class], modules = [LocationListModule::class])
 interface LocationListComponent {
 
     fun inject(fragment: LocationListFragment)

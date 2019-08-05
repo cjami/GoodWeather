@@ -6,4 +6,8 @@ dependencies {
     implementation project(':core')
     testImplementation project(':testing-tools')
     testImplementation project(':testing-android-tools')
+
+    implementation Libraries.Support.cardView
+    implementation Libraries.Support.navigationFragment
+    implementation Libraries.Support.navigationUI
 }

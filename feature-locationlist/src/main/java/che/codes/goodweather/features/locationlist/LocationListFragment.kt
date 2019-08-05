@@ -69,6 +69,11 @@ class LocationListFragment : BaseFragment() {
         setActionBarTitle(R.string.title_location_list)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        disposables.clear()
+    }
+
     private fun handleResult(result: Result) {
         when (result) {
             is Result.Success -> {

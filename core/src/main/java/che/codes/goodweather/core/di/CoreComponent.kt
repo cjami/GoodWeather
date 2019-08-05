@@ -33,12 +33,12 @@ interface CoreComponent {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient
 
-//    fun provideAddCity(): AddCity
-//    fun provideGeocodeCity(): GeocodeCity
-//    fun provideGetFourDayForecast(): GetFourDayForecast
-//    fun provideGetTempUnit(): GetTempUnit
+    fun provideAddCity(): AddCity
+    fun provideGeocodeCity(): GeocodeCity
+    fun provideGetFourDayForecast(): GetFourDayForecast
+    fun provideGetTempUnit(): GetTempUnit
     fun provideLoadCities(): LoadCities
-//    fun provideSwitchTempUnit(): SwitchTempUnit
+    fun provideSwitchTempUnit(): SwitchTempUnit
 
     @Singleton
     fun provideAppContext(): Context
