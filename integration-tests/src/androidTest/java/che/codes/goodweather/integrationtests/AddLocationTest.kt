@@ -8,19 +8,23 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.test.espresso.Espresso.onIdle
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import che.codes.androidtesting.AndroidFileUtils.getJsonFromFile
 import che.codes.androidtesting.IdlingSchedulerRule
 import che.codes.androidtesting.MockServerUtils.createJsonResponse
+import che.codes.androidtesting.TestComputationSchedulerRule
 import che.codes.goodweather.core.di.AppContextModule
 import che.codes.goodweather.core.di.CoreComponent
 import che.codes.goodweather.features.addlocation.AddLocationFragment
+import che.codes.goodweather.features.addlocation.TEXT_CHANGE_DEBOUNCE
 import che.codes.goodweather.integrationtests.di.DaggerTestCoreComponent
 import che.codes.goodweather.integrationtests.di.TestPropertyModule
 import com.nhaarman.mockitokotlin2.mock
@@ -33,12 +37,16 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class AddLocationTest {
 
     @get:Rule
     val schedulerRule = IdlingSchedulerRule()
+
+    @get:Rule
+    val testSchedulerRule = TestComputationSchedulerRule()
 
     private lateinit var mockServer: MockWebServer
 
@@ -69,9 +77,10 @@ class AddLocationTest {
     @Test
     fun validCityNameInput_countryDisplayed() {
         geocodeSuccess()
-        launchFragmentInContainer<AddLocationFragment>(Bundle(), R.style.Theme_AppCompat)
+        launchFragment()
 
         onView(withId(R.id.edit_city_name)).perform(typeText("Mountain View"))
+        testSchedulerRule.testScheduler.advanceTimeBy(TEXT_CHANGE_DEBOUNCE, TimeUnit.MILLISECONDS)
 
         onView(withId(R.id.text_city_country)).check(matches(withText("United States")))
     }
@@ -79,19 +88,22 @@ class AddLocationTest {
     @Test
     fun invalidCityNameInput_countryNotDisplayed() {
         geocodeNoResults()
-        launchFragmentInContainer<AddLocationFragment>(Bundle(), R.style.Theme_AppCompat)
+        launchFragment()
 
         onView(withId(R.id.edit_city_name)).perform(typeText("thisisnotacity"))
+        testSchedulerRule.testScheduler.advanceTimeBy(TEXT_CHANGE_DEBOUNCE, TimeUnit.MILLISECONDS)
 
-        onView(withId(R.id.text_city_country)).check(matches(not(withText("United States"))))
+        onView(withId(R.id.text_city_country)).check(matches(not(isDisplayed())))
     }
 
     @Test
     fun addAction_locationAdded() {
         geocodeSuccess()
-        val fragmentScenario = launchFragmentInContainer<AddLocationFragment>(Bundle(), R.style.Theme_AppCompat)
+        val fragmentScenario = launchFragment()
         setupAddAction(fragmentScenario)
         onView(withId(R.id.edit_city_name)).perform(typeText("Mountain View"))
+        testSchedulerRule.testScheduler.advanceTimeBy(TEXT_CHANGE_DEBOUNCE, TimeUnit.MILLISECONDS)
+        onIdle()
 
         fragmentScenario.onFragment {
             it.onOptionsItemSelected(menuAddItemMock)
@@ -103,9 +115,11 @@ class AddLocationTest {
     @Test
     fun addAction_popBackStack() {
         geocodeSuccess()
-        val fragmentScenario = launchFragmentInContainer<AddLocationFragment>(Bundle(), R.style.Theme_AppCompat)
+        val fragmentScenario = launchFragment()
         setupAddAction(fragmentScenario)
         onView(withId(R.id.edit_city_name)).perform(typeText("Mountain View"))
+        testSchedulerRule.testScheduler.advanceTimeBy(TEXT_CHANGE_DEBOUNCE, TimeUnit.MILLISECONDS)
+        onIdle()
 
         fragmentScenario.onFragment {
             it.onOptionsItemSelected(menuAddItemMock)
@@ -122,6 +136,10 @@ class AddLocationTest {
 
     private fun geocodeNoResults() {
         mockServer.enqueue(createJsonResponse(200, getJsonFromFile("geocoder_no_results.json")))
+    }
+
+    private fun launchFragment():FragmentScenario<AddLocationFragment>{
+        return launchFragmentInContainer(Bundle(), R.style.Theme_AppCompat)
     }
 
     private fun setupAddAction(fragmentScenario: FragmentScenario<AddLocationFragment>) {

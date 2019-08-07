@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_add_location.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-private const val TEXT_CHANGE_DEBOUNCE = 500L
+const val TEXT_CHANGE_DEBOUNCE = 500L
 
 class AddLocationFragment : BaseFragment() {
 
@@ -50,6 +50,7 @@ class AddLocationFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         disposables.add(edit_city_name.textChanges()
+            .doOnEach{ clearCurrentCity() }
             .debounce(TEXT_CHANGE_DEBOUNCE, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { text -> handleTextChange(text.toString()) })
@@ -87,6 +88,7 @@ class AddLocationFragment : BaseFragment() {
     }
 
     private fun handleTextChange(text: String) {
+        text_city_country.visibility = View.INVISIBLE
         viewModel.geocode(text)
     }
 
@@ -95,13 +97,19 @@ class AddLocationFragment : BaseFragment() {
             is Result.Success -> {
                 currentCity = result.city
                 text_city_country.text = result.city.country.longName
+                text_city_country.visibility = View.VISIBLE
+                activity?.invalidateOptionsMenu()
             }
             is Result.Error, Result.Processing -> {
-                currentCity = null
-                text_city_country.text = null
+                clearCurrentCity()
             }
         }
+    }
 
+    private fun clearCurrentCity(){
+        currentCity = null
+        text_city_country.text = null
+        text_city_country.visibility = View.INVISIBLE
         activity?.invalidateOptionsMenu()
     }
 }
