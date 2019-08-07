@@ -1,7 +1,30 @@
-{
-  "name": "Clouds",
-  "description": "broken clouds",
-  "temp": 297.77,
-  "day": "WEDNESDAY",
-  "icon": "04d"
-}
+[
+  {
+    "name": "Clear",
+    "description": "clear sky",
+    "temp": 283.76,
+    "day": "MONDAY",
+    "icon": "01n"
+  },
+  {
+    "name": "Clear",
+    "description": "clear sky",
+    "temp": 283.76,
+    "day": "TUESDAY",
+    "icon": "01n"
+  },
+  {
+    "name": "Clear",
+    "description": "clear sky",
+    "temp": 283.76,
+    "day": "WEDNESDAY",
+    "icon": "01n"
+  },
+  {
+    "name": "Clouds",
+    "description": "overcast clouds",
+    "temp": 280.00,
+    "day": "THURSDAY",
+    "icon": "04d"
+  }
+]

@@ -1,14 +1,10 @@
 package che.codes.goodweather.core.di
 
 import android.content.Context
-import che.codes.goodweather.core.BuildConfig
 import che.codes.goodweather.data.city.geocoderapi.di.CityGeocoderModule
 import che.codes.goodweather.data.city.sharedprefs.di.CityStorageModule
 import che.codes.goodweather.data.di.DataModule
 import che.codes.goodweather.data.settings.sharedprefs.di.SettingsStorageModule
-import che.codes.goodweather.domain.CityRepository
-import che.codes.goodweather.domain.SettingsRepository
-import che.codes.goodweather.domain.WeatherRepository
 import che.codes.goodweather.domain.usecases.*
 import che.codes.weather.openweathermap.di.WeatherDataSourceModule
 import dagger.Component
@@ -35,7 +31,7 @@ interface CoreComponent {
 
     fun provideAddCity(): AddCity
     fun provideGeocodeCity(): GeocodeCity
-    fun provideGetFourDayForecast(): GetFourDayForecast
+    fun provideGetFourDayForecast(): GetForecast
     fun provideGetTempUnit(): GetTempUnit
     fun provideLoadCities(): LoadCities
     fun provideSwitchTempUnit(): SwitchTempUnit

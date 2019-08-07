@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">View Location</string>
+    <string name="format_location">%1$s, %2$s</string>
+    <string name="format_temperature">%1$s%2$s</string>
+    <string name="celsius">\u2103</string>
+    <string name="fahrenheit">\u2109</string>
 </resources>

@@ -6,7 +6,7 @@ import dagger.Provides
 import javax.inject.Named
 
 private const val GEOCODER_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
-private const val OPENWEATHERMAP_API_URL = "https://api.openweathermap.org/data/2.5/forecast/"
+private const val OPENWEATHERMAP_API_URL = "https://api.openweathermap.org/data/2.5/"
 
 @Module
 class PropertyModule {

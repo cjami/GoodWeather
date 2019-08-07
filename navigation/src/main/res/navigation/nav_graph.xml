@@ -12,7 +12,8 @@
                 app:destination="@id/fragment_add_location"/>
         <action
                 android:id="@+id/action_view_location"
-                app:destination="@id/fragment_view_location"/>
+                app:destination="@id/fragment_view_location"
+                app:enterAnim="@anim/slide_in_bottom"/>
     </fragment>
 
     <fragment

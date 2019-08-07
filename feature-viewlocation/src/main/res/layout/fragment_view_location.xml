@@ -1,62 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/secondary_dark"
+            app:cardElevation="3dp">
 
         <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:id="@+id/card_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
 
             <TextView
-                    android:id="@+id/text_day_now"
+                    android:id="@+id/text_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:layout_centerHorizontal="true"/>
 
             <ImageView
-                    android:id="@+id/image_weather_now"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_day_now"
+                    android:id="@+id/image_weather"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_below="@id/text_day"
                     android:layout_centerHorizontal="true"/>
 
             <TextView
-                    android:id="@+id/text_temp_now"
+                    android:id="@+id/text_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/image_weather_now"
+                    android:layout_below="@id/image_weather"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                     android:layout_centerHorizontal="true"/>
 
-            <include
-                    layout="@layout/item_day_forecast"
-                    android:id="@+id/day_one"
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_temp_now"
-                    android:layout_toStartOf="@id/day_two"/>
+                    android:layout_below="@id/text_temp"
+                    android:layout_margin="20dp"
+                    android:orientation="horizontal">
 
-            <include
-                    layout="@layout/item_day_forecast"
-                    android:id="@+id/day_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_temp_now"
-                    android:layout_centerHorizontal="true"/>
+                <include
+                        layout="@layout/item_day_forecast"
+                        android:id="@+id/day_two"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
 
-            <include
-                    layout="@layout/item_day_forecast"
-                    android:id="@+id/day_three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_temp_now"
-                    android:layout_toEndOf="@id/day_two"/>
+                <include
+                        layout="@layout/item_day_forecast"
+                        android:id="@+id/day_three"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
 
+                <include
+                        layout="@layout/item_day_forecast"
+                        android:id="@+id/day_four"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+            </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

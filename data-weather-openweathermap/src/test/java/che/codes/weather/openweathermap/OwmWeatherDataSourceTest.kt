@@ -1,6 +1,7 @@
 package che.codes.weather.openweathermap
 
 import che.codes.goodweather.domain.models.Weather
+import che.codes.testing.FileUtils.getListFromFile
 import che.codes.testing.FileUtils.getObjectFromFile
 import che.codes.testing.RxTestUtils.assertError
 import che.codes.testing.RxTestUtils.getResult
@@ -22,7 +23,7 @@ internal class OwmWeatherDataSourceTest {
     private val serviceMock: OwmApiService = mock()
     private val testApiId = "API_ID"
     private val testPayload = getObjectFromFile("owm_success_payload.json", OwmWeatherPayload::class.java)
-    private val expectedWeather = getObjectFromFile("expected_weather.json", Weather::class.java)
+    private val expectedWeather = getListFromFile("expected_weather.json", Array<Weather>::class.java)
 
     @BeforeEach
     fun setUp() {
@@ -35,18 +36,18 @@ internal class OwmWeatherDataSourceTest {
         fun `interacts with service`() {
             success()
 
-            sut.getForecast(0.0, 0.0, 4)
+            sut.getForecast(0.0, 0.0)
 
-            verify(serviceMock).getForecast(0.0, 0.0, 4, testApiId)
+            verify(serviceMock).getForecast(0.0, 0.0, testApiId)
         }
 
         @Test
         fun `returns correct weather on service success`() {
             success()
 
-            val result = getResult(sut.getForecast(0.0, 0.0, 4))
+            val result = getResult(sut.getForecast(0.0, 0.0))
 
-            assertThat(result[0], equalTo(expectedWeather))
+            assertThat(result, equalTo(expectedWeather))
         }
 
         @Test
@@ -54,18 +55,18 @@ internal class OwmWeatherDataSourceTest {
             val e = Throwable("General Error")
             error(e)
 
-            assertError(sut.getForecast(0.0, 0.0, 4), e)
+            assertError(sut.getForecast(0.0, 0.0), e)
         }
     }
 
     //region Helper Methods
 
     private fun success() {
-        whenever(serviceMock.getForecast(any(), any(), any(), any())).thenReturn(Single.just(testPayload))
+        whenever(serviceMock.getForecast(any(), any(), any())).thenReturn(Single.just(testPayload))
     }
 
     private fun error(e: Throwable) {
-        whenever(serviceMock.getForecast(any(), any(), any(), any())).thenReturn(Single.error(e))
+        whenever(serviceMock.getForecast(any(), any(), any())).thenReturn(Single.error(e))
     }
 
     //endregion

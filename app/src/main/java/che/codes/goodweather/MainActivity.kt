@@ -1,6 +1,6 @@
 package che.codes.goodweather
 
-import androidx.appcompat.app.AppCompatActivity
+import android.animation.LayoutTransition
 import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
@@ -8,9 +8,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import che.codes.goodweather.core.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -21,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         setupNavigation()
+
+        collapseToolbar()
     }
 
     override fun onBackPressed() {
@@ -43,5 +46,22 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         nav_view.setupWithNavController(navController)
+    }
+
+    override fun expandToolbar() {
+        toolbar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        toolbar.layoutParams.let {
+            it.height = resources.getDimension(R.dimen.action_bar_expanded_height).toInt()
+
+            toolbar.layoutParams = it
+        }
+    }
+
+    override fun collapseToolbar() {
+        toolbar.layoutParams.let {
+            it.height = resources.getDimension(R.dimen.action_bar_default_height).toInt()
+
+            toolbar.layoutParams = it
+        }
     }
 }

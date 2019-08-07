@@ -17,6 +17,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
+                android:gravity="bottom"
+                android:paddingBottom="11dp"
+                android:animateLayoutChanges="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
         <fragment

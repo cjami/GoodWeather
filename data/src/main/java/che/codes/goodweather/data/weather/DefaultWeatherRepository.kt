@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 class DefaultWeatherRepository(private val source: WeatherDataSource) : WeatherRepository {
 
-    override fun getForecast(latitude: Double, longitude: Double, days: Int): Single<List<Weather>> {
-        return source.getForecast(latitude, longitude, days)
+    override fun getForecast(latitude: Double, longitude: Double): Single<List<Weather>> {
+        return source.getForecast(latitude, longitude)
     }
 }

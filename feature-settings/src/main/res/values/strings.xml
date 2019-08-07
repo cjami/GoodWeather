@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Settings</string>
+    <string name="title_settings">Settings</string>
+    <string name="label_setting_temp">Display Fahrenheit:</string>
 </resources>

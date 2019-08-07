@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Clear",
+    "description": "clear sky",
+    "temp": 51,
+    "day": "MONDAY",
+    "icon": "01n"
+  },
+  {
+    "name": "Clear",
+    "description": "clear sky",
+    "temp": 51,
+    "day": "TUESDAY",
+    "icon": "01n"
+  },
+  {
+    "name": "Clear",
+    "description": "clear sky",
+    "temp": 51,
+    "day": "WEDNESDAY",
+    "icon": "01n"
+  },
+  {
+    "name": "Clouds",
+    "description": "overcast clouds",
+    "temp": 44,
+    "day": "THURSDAY",
+    "icon": "04d"
+  }
+]

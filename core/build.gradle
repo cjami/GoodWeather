@@ -10,6 +10,10 @@ android.buildTypes.each{
     it.buildConfigField 'String', 'OPENWEATHERMAP_APP_ID', keys['openweathermap.id']
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     api project(':domain')
     implementation project(':data')

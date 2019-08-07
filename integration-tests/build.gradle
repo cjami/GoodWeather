@@ -1,0 +1,71 @@
+import che.codes.build.*
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
+        versionCode Android.versionCode
+        versionName Android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':navigation')
+    implementation project(':feature-addlocation')
+    implementation project(':feature-locationlist')
+    implementation project(':feature-settings')
+    implementation project(':feature-viewlocation')
+    implementation project(':data')
+    implementation project(':data-city-geocoderapi')
+    implementation project(':data-city-sharedprefs')
+    implementation project(':data-weather-openweathermap')
+    implementation project(':data-settings-sharedprefs')
+
+    implementation Libraries.kotlin
+    implementation Libraries.rxjava
+    implementation Libraries.rxandroid
+    implementation Libraries.dagger
+    implementation Libraries.Support.appcompat
+    implementation Libraries.Support.coreKtx
+    implementation Libraries.Support.lifecycleExtensions
+    implementation Libraries.Support.navigationFragment
+    implementation Libraries.Support.navigationUI
+    kapt AnnotationPlugins.dagger
+    androidTestImplementation Libraries.Test.junit4
+    androidTestImplementation Libraries.Test.coreTesting
+    androidTestImplementation Libraries.Test.mockito
+    androidTestImplementation Libraries.Test.mockitoAndroid
+    androidTestImplementation Libraries.Test.mockitoKotlin
+    androidTestImplementation Libraries.AndroidTest.runner
+    androidTestImplementation Libraries.AndroidTest.espressoCore
+    androidTestImplementation Libraries.AndroidTest.espressoContrib
+    androidTestImplementation Libraries.AndroidTest.rules
+    androidTestImplementation Libraries.AndroidTest.junit
+    androidTestImplementation Libraries.AndroidTest.junitKtx
+    debugImplementation Libraries.AndroidTest.fragment
+
+    androidTestImplementation project(':testing-tools')
+    androidTestImplementation project(':testing-android-tools')
+
+    kaptAndroidTest AnnotationPlugins.dagger
+    androidTestImplementation Libraries.AndroidTest.mockwebserver
+}

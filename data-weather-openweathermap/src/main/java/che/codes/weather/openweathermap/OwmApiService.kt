@@ -7,11 +7,10 @@ import retrofit2.http.Query
 
 interface OwmApiService {
 
-    @GET("daily")
+    @GET("forecast")
     fun getForecast(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("cnt") days: Int,
         @Query("appid") appId: String
     ): Single<OwmWeatherPayload>
 }

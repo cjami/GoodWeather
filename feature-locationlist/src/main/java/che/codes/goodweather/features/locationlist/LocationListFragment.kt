@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import che.codes.goodweather.core.ui.BaseFragment
 import che.codes.goodweather.core.di.CoreComponent
+import che.codes.goodweather.core.models.CityParcel
 import che.codes.goodweather.domain.models.City
 import che.codes.goodweather.features.locationlist.LocationListViewModel.Result
 import che.codes.goodweather.features.locationlist.di.DaggerLocationListComponent
@@ -19,6 +20,8 @@ import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_location_list.*
 import javax.inject.Inject
+
+const val ARG_CITY = "ARG_CITY"
 
 class LocationListFragment : BaseFragment() {
 
@@ -45,7 +48,6 @@ class LocationListFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_location_list, container, false)
     }
 
-    @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -58,7 +60,7 @@ class LocationListFragment : BaseFragment() {
             adapter = locationListAdapter
         }
 
-        button_add.clicks().subscribe { handleAddClick() }
+        disposables.add(button_add.clicks().subscribe { handleAddClick() })
 
         viewModel.result.observe(this, Observer<Result> { handleResult(it) })
     }
@@ -86,7 +88,11 @@ class LocationListFragment : BaseFragment() {
     }
 
     private fun handleLocationItemClick(city: City) {
-        findNavController().navigate(R.id.action_view_location)
+        findNavController().navigate(
+            R.id.action_view_location,
+            Bundle().apply {
+                putParcelable(ARG_CITY, CityParcel.fromCity(city)) // Can be done better with Safe Args
+            })
     }
 
     private fun handleAddClick() {

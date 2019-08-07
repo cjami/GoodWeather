@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            app:rippleColor="@color/secondary"
             app:backgroundTint="@color/primary"
             app:tint="@color/secondary"
             app:srcCompat="@drawable/ic_add_white_24dp"/>

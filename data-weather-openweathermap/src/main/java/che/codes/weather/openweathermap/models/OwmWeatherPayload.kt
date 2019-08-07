@@ -10,22 +10,16 @@ data class OwmWeatherPayload(
 
     data class Result(
         val dt: Long,
-        val temp: Temperature,
-        val pressure: Double,
-        val humidity: Int,
+        val main: Main,
         val weather: List<Weather>
     ) {
 
-        data class Temperature(
-            val day: Double,
-            val min: Double,
-            val max: Double,
-            val night: Double,
-            val eve: Double,
-            val morn: Double
+        data class Main(
+            val temp: Double
         )
 
         data class Weather(
+            val id: Int,
             val main: String,
             val description: String,
             val icon: String

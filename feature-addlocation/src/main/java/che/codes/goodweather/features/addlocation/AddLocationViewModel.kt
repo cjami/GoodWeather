@@ -1,5 +1,6 @@
 package che.codes.goodweather.features.addlocation
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import che.codes.goodweather.domain.models.City
@@ -15,8 +16,6 @@ class AddLocationViewModel(private val geocodeCity: GeocodeCity, private val add
     val disposables = CompositeDisposable()
 
     fun geocode(cityName: String) {
-        disposables.clear()
-
         disposables.add(geocodeCity.invoke(cityName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

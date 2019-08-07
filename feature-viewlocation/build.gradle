@@ -10,4 +10,5 @@ dependencies {
     implementation Libraries.Support.cardView
     implementation Libraries.Support.navigationFragment
     implementation Libraries.Support.navigationUI
+    implementation Libraries.picasso
 }

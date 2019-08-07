@@ -21,8 +21,11 @@ class UseCaseModule {
     }
 
     @Provides
-    fun provideGetFourDayForecast(repository: WeatherRepository): GetFourDayForecast {
-        return GetFourDayForecast(repository)
+    fun provideGetFourDayForecast(
+        weatherRepository: WeatherRepository,
+        settingsRepository: SettingsRepository
+    ): GetForecast {
+        return GetForecast(weatherRepository, settingsRepository)
     }
 
     @Provides

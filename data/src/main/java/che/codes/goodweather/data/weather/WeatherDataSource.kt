@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface WeatherDataSource {
 
-    fun getForecast(latitude: Double, longitude: Double, days: Int) : Single<List<Weather>>
+    fun getForecast(latitude: Double, longitude: Double) : Single<List<Weather>>
 }
