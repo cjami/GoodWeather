@@ -7,19 +7,32 @@
             android:id="@+id/edit_city_name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
             android:hint="@string/hint_city">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_city_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-12dp"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:background="@android:color/transparent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
             android:id="@+id/text_city_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_city_name_layout"/>
+            android:layout_below="@id/edit_city_name_layout"
+            android:layout_alignStart="@id/edit_city_name_layout"
+            android:layout_alignEnd="@id/edit_city_name_layout"
+            android:layout_marginStart="-5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_place_grey_24dp"
+            android:drawablePadding="3dp"/>
 
 </RelativeLayout>
