@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_add_location.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+private const val TEXT_CHANGE_DEBOUNCE = 500L
+
 class AddLocationFragment : BaseFragment() {
 
     @Inject
@@ -48,7 +50,7 @@ class AddLocationFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         disposables.add(edit_city_name.textChanges()
-            .debounce(300, TimeUnit.MILLISECONDS)
+            .debounce(TEXT_CHANGE_DEBOUNCE, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { text -> handleTextChange(text.toString()) })
 
