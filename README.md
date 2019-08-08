@@ -9,7 +9,7 @@ GoodWeather is an Android app that displays a four day weather forecast for a gi
 ### Setup:
 The app requires **GeocoderAPI**/**OpenWeatherMap** API keys. To do this add a `keys.properties` file to the root of the project.
 
-The inside of this file should look like this (replacing placeholders with your keys):
+The inside of the file should look like this (replacing placeholders with your keys):
 
 ```
 # Geocoder API Key
